@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: local
+
+  application:
+    name: autocomplete
+
+  mvc:
+    throws-exception-if-no-handler-found: true
+    view:
+      prefix: /views/
+      suffix: .jsp
+
+  devtools:
+    livereload:
+      enabled: false
+
+logging:
+  config:
+    classpath: logback-spring.xml

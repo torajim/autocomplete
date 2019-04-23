@@ -1,0 +1,61 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.franzbecker:gradle-lombok:1.8"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: "io.franzbecker.gradle-lombok"
+apply plugin: 'io.spring.dependency-management'
+
+jar {
+    baseName = 'autocomplete'
+    version = '0.0.1-SNAPSHOT'
+    manifest {
+        attributes("Main-Class": "com.torajim.autocomplete.Application")
+        exclude('**/*local*.yml', '**/*local*.properties')
+    }
+}
+
+group 'com.torajim'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configurations {
+    all*.exclude module : 'spring-boot-starter-logging'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile("org.projectlombok:lombok")
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compileOnly('org.apache.tomcat.embed:tomcat-embed-jasper:8.5.14')
+
+    compile("com.fasterxml.jackson.core:jackson-databind")
+    compile('javax.servlet:jstl')
+    compile('org.apache.tomcat.embed:tomcat-embed-jasper')
+
+    compile 'ch.qos.logback:logback-classic:1.1.2'
+    compile 'ch.qos.logback:logback-core:1.1.2'
+    compile 'org.slf4j:slf4j-api:1.7.10'
+
+    compile("commons-logging:commons-logging:1.2")
+}
