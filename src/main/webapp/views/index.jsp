@@ -22,7 +22,7 @@
 		$("#searchBox").autocomplete({
 			source : function(request, response) {
 				$.ajax({
-					url : "http://34.96.121.137/search",
+					url : "http://localhost:8080/search",
 					dataType : "json",
 					data : {
 						q : request.term
