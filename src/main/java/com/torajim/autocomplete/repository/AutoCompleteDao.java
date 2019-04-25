@@ -17,6 +17,7 @@ public class AutoCompleteDao {
         strings.add("나무");
         strings.add("나혼자산다");
         strings.add("나의살던고향은");
+        strings.add("고려은단");
         strings.add("Lorem Ipsum has been the industry's standard dummy");
         strings.add("nd scrambled it to make a type specimen book. It");
         strings.add("typesetting, remaining essentially unchanged. It ");
