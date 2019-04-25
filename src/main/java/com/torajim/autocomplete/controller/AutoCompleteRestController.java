@@ -3,6 +3,7 @@ package com.torajim.autocomplete.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.torajim.autocomplete.service.AutoCompleteService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+@Slf4j
 @RestController
 public class AutoCompleteRestController {
     @Autowired
@@ -31,7 +34,11 @@ public class AutoCompleteRestController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "public");
         headers.add("Cache-Control", "max-age=86400");
-        headers.add("Content-Length", resp.length() + "");
+        try {
+            headers.add("Content-Length", resp.getBytes("UTF-8").length + "");
+        } catch (UnsupportedEncodingException e) {
+            log.error(e.toString());
+        }
         return new ResponseEntity<String>(resp, headers, HttpStatus.OK);
     }
 }
