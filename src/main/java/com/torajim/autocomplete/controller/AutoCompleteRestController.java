@@ -33,7 +33,7 @@ public class AutoCompleteRestController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Cache-Control", "public");
-        headers.add("Cache-Control", "max-age=86400");
+        headers.add("Cache-Control", "max-age=15");
         try {
             headers.add("Content-Length", resp.getBytes("UTF-8").length + "");
         } catch (UnsupportedEncodingException e) {
