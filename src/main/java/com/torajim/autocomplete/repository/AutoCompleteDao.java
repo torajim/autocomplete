@@ -22,6 +22,7 @@ public class AutoCompleteDao {
         strings.add("스칼라는 재밌어");
         strings.add("하둡과 스파크를 활용한");
         strings.add("조선왕조실록");
+        strings.add("퍼스널오라클");
         strings.add("Lorem Ipsum has been the industry's standard dummy");
         strings.add("nd scrambled it to make a type specimen book. It");
         strings.add("typesetting, remaining essentially unchanged. It ");
