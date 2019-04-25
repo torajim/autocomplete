@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.torajim.autocomplete.service.AutoCompleteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,11 @@ public class AutoCompleteRestController {
             resp = mapper.writeValueAsString(strings);
         } catch (JsonProcessingException e) {
         }
-        return new ResponseEntity<String>(resp, HttpStatus.OK);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "public");
+        headers.add("Cache-Control", "max-age=86400");
+        headers.add("Content-Length", resp.length() + "");
+        return new ResponseEntity<String>(resp, headers, HttpStatus.OK);
     }
 }
