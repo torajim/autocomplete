@@ -27,7 +27,7 @@
             </encoder>
         </appender>
 
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="APP_LOG_FILE" />
         </root>
@@ -47,7 +47,7 @@
             </encoder>
         </appender>
 
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="APP_LOG_FILE" />
         </root>

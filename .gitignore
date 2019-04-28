@@ -32,5 +32,5 @@ src/generated/
 src/querydsl
 src/main/generated/
 
-*.csv
-*.xls
+#*.csv
+#*.xls
