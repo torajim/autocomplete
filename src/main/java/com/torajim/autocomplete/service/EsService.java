@@ -23,7 +23,7 @@ public class EsService {
     @Value("${autocomplete.index}")
     private String index;
 
-    @Value("${autocomplete.type")
+    @Value("${autocomplete.type}")
     private String type;
 
     @Autowired
