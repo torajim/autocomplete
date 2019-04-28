@@ -54,7 +54,7 @@ public class EsService {
         try {
             Response response = esRestClient.callEsApi("GET", url, searchJson);
             log.info(response.toString());
-            if(response != null && response.getEntity() != null){
+            if(response != null || response.getEntity() != null){
                 log.info(response.getEntity().toString());
             }else{
                 JsonNode resultNode = objectMapper.readTree(EntityUtils.toString(response.getEntity()));
