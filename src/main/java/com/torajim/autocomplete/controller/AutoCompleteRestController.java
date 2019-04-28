@@ -3,8 +3,10 @@ package com.torajim.autocomplete.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.torajim.autocomplete.service.AutoCompleteService;
+import com.torajim.autocomplete.service.EsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,29 +23,24 @@ public class AutoCompleteRestController {
     @Autowired
     AutoCompleteService autoCompleteService;
 
+    @Autowired
+    EsService esService;
+
+    @Autowired
+    ListToResponse listToResponse;
+
+    @Value("${autocomplete.es.use}")
+    private boolean esUse;
+
     @GetMapping("/search")
     public ResponseEntity<String> doAutoComplete(@RequestParam("q") final String input) {
-        List<String> strings = autoCompleteService.doAutoComplete(input);
-        ObjectMapper mapper = new ObjectMapper();
-        String resp = "";
-        try {
-            resp = mapper.writeValueAsString(strings);
-        } catch (JsonProcessingException e) {
-        }
-
-        HttpHeaders headers = new HttpHeaders();
-
-        if(strings != null && strings.size() > 0){
-            try {
-                headers.add("Cache-Control", "public");
-                headers.add("Cache-Control", "max-age=3600");
-                headers.add("Content-Length", resp.getBytes("UTF-8").length + "");
-            } catch (UnsupportedEncodingException e) {
-                log.error(e.toString());
-            }
-            return new ResponseEntity<String>(resp, headers, HttpStatus.OK);
+        List<String> strings = null;
+        if(esUse){
+            strings = esService.getWordByPrefix(input);
         }else{
-            return new ResponseEntity<String>(resp, headers, HttpStatus.NO_CONTENT);
+            strings = autoCompleteService.doAutoComplete(input);
         }
+
+        return listToResponse.listToResponse(strings);
     }
 }
