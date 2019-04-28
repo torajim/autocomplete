@@ -36,6 +36,7 @@ public class AutoCompleteRestController {
     public ResponseEntity<String> doAutoComplete(@RequestParam("q") final String input) {
         List<String> strings = null;
         if(esUse){
+            log.info(input);
             strings = esService.getWordByPrefix(input);
         }else{
             strings = autoCompleteService.doAutoComplete(input);

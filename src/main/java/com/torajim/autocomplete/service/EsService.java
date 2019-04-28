@@ -50,8 +50,10 @@ public class EsService {
         List<String> hitsWords = new ArrayList<>();
         String url = index + "/" + type + "/_search";
         String searchJson = "{\"query\":{\"prefix\":{\"word\":\"" + prefix + "\"}}, \"sort\":[{\"score\":\"desc\"}]}";
+        log.info("url:" + url + ", searchJson:" + searchJson);
         try {
             Response response = esRestClient.callEsApi("GET", url, searchJson);
+            log.info(response.toString());
             if(response != null && response.getEntity() != null){
                 log.info(response.getEntity().toString());
             }else{
