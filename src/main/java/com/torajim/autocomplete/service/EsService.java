@@ -48,7 +48,7 @@ public class EsService {
 
     public List<String> getWordByPrefix(String prefix){
         List<String> hitsWords = new ArrayList<>();
-        String url = index + "/" + type + "_search";
+        String url = index + "/" + type + "/_search";
         String searchJson = "{\"query\":{\"prefix\":{\"word\":\"" + prefix + "\"}}, \"sort\":[{\"score\":\"desc\"}]}";
         try {
             Response response = esRestClient.callEsApi("GET", url, searchJson);
