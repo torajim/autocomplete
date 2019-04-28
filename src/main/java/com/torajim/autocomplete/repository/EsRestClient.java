@@ -32,7 +32,6 @@ public class EsRestClient {
     }
 
     public Response callEsApi(String httpMethod, String url, String jsonString) throws IOException {
-
         Response response = null;
         Request request = new Request(httpMethod, url);
         request.addParameter("pretty", "true");
@@ -44,7 +43,6 @@ public class EsRestClient {
             request.setEntity(entity);
             response = getRestClient().performRequest(request);
         }
-
         return response;
     }
 }
