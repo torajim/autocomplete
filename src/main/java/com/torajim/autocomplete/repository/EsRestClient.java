@@ -37,7 +37,7 @@ public class EsRestClient {
         Request request = new Request(httpMethod, url);
         request.addParameter("pretty", "true");
 
-        if("GET".equals(httpMethod) || "DELETE".equals(httpMethod)){
+        if(jsonString == null || jsonString.length() == 0){
             response = getRestClient().performRequest(request);
         }else{
             HttpEntity entity = new NStringEntity(jsonString, ContentType.APPLICATION_JSON);
