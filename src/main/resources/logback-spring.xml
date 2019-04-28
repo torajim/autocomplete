@@ -13,7 +13,7 @@
         </root>
     </springProfile>
 
-    <springProfile name="stg">
+    <springProfile name="prdus">
         <appender name="APP_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <file>${appLogFilePath}.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -27,13 +27,13 @@
             </encoder>
         </appender>
 
-        <root level="INFO">
+        <root level="DEBUG">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="APP_LOG_FILE" />
         </root>
     </springProfile>
 
-    <springProfile name="prd">
+    <springProfile name="prdasia">
         <appender name="APP_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <file>${appLogFilePath}.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
